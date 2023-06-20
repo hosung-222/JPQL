@@ -16,15 +16,20 @@ public class JpaMain {
             team.setName("teamA");
             em.persist(team);
 
-            for (int i = 0; i <100 ; i++) {
-                Member member = new Member();
-                member.setUsername("member" + i);
-                member.setAge(i);
-                member.setTeam(team);
+//            for (int i = 0; i <100 ; i++) {
+//                Member member = new Member();
+//                member.setUsername("member" + i);
+//                member.setAge(i);
+//                member.setTeam(team);
+//
+//                em.persist(member);
+//            }
+            Member member = new Member();
+            member.setUsername("teamA" );
+            member.setAge(10);
+            member.setTeam(team);
 
-                em.persist(member);
-            }
-
+            em.persist(member);
 
             //반환 타입
 //            //TypedQuery : 반환 타입이 명확할 때 사용
@@ -39,7 +44,7 @@ public class JpaMain {
 //            for (Member member1: resultList) {
 //                System.out.println("member1=" + member1);
 //            }
-//            //결과가 하나일때 -> 결과가 없으면 NoResultException, 둘 이상이면, NonUniqueResultException 발생
+//            //결과가 하나일때 .getSingleResult -> 결과가 없으면 NoResultException, 둘 이상이면, NonUniqueResultException 발생
 //            TypedQuery<Member> query = em.createQuery("select m from Member m where m.id = 1", Member.class);
 //            Member member1 = query.getSingleResult();
 //            System.out.println("member=" + member1);
@@ -124,6 +129,16 @@ public class JpaMain {
 //                    .setFirstResult(1)
 //                    .setMaxResults(10)
 //                    .getResultList();
+            //ON 절
+//            //1. 조인 대상 필터링
+//            String query = "select m from Member m left JOIN m.team t on t.name = 'teamA'";
+//            List<Member> result = em.createQuery(query,Member.class).getResultList();
+//            System.out.println("result = " + result.size());
+//            //2. 연관관계 없는 외부조인
+//            String query = "select m from Member m left join Team  t on m.username = t.name";
+//            List<Member> result = em.createQuery(query,Member.class).getResultList();
+//            System.out.println("result = " + result.size());
+
 
 
             em.flush();
