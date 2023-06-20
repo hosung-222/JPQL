@@ -11,10 +11,17 @@ public class JpaMain {
         tx.begin();
 
         try{
+
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+
             for (int i = 0; i <100 ; i++) {
                 Member member = new Member();
                 member.setUsername("member" + i);
                 member.setAge(i);
+                member.setTeam(team);
+
                 em.persist(member);
             }
 
@@ -97,6 +104,26 @@ public class JpaMain {
 //            }
 
 
+
+            //조인
+//            //내부 조인 [inner생략 가능]
+//            String query = "select m from Member m inner join m.team t ";
+//            List<Member> result = em.createQuery(query,Member.class)
+//                            .setFirstResult(1)
+//                                    .setMaxResults(10)
+//                                            .getResultList();
+//            //외부 조인 left Outer조인  [outer생략 가능]
+//            String query1 = "select m from Member m left outer join m.team t ";
+//            List<Member> result1 = em.createQuery(query1,Member.class)
+//                    .setFirstResult(1)
+//                    .setMaxResults(10)
+//                    .getResultList();
+//            //세타 조인
+//            String query2 = "select m from Member m, Team t where m.username = t.name";
+//            List<Member> result2 = em.createQuery(query2,Member.class)
+//                    .setFirstResult(1)
+//                    .setMaxResults(10)
+//                    .getResultList();
 
 
             em.flush();
