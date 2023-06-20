@@ -13,6 +13,8 @@ public class JpaMain {
         try{
             Member member = new Member();
             member.setUsername("member1");
+            member.setAge(10);
+            em.persist(member);
 
             //반환 타입
 //            //TypedQuery : 반환 타입이 명확할 때 사용
@@ -46,9 +48,38 @@ public class JpaMain {
 //            System.out.println("Result = " + result.getUsername());
 
 
+            //프로젝션
+//            // 엔티티 프로젝션
+//            List<Team> result = em.createQuery("select t from Member m join m.team t", Team.class)
+//                            .getResultList();
+//            // 임베디드 타입 프로젝션
+//            em.createQuery("select O.address from Order O", Address.class)
+//                    .getResultList();
+//            //스칼라 타입 프로젝션
+//            em.createQuery("select distinct m.username, m.age from Member m")
+//                    .getResultList();
 
 
-            em.persist(member);
+            //프로젝션 여러 값 조회
+//            //1. Query type
+//            List resultList = em.createQuery("select distinct m.username, m.age from Member m")
+//                    .getResultList();
+//            Object o = resultList.get(0);
+//            Object[] result = (Object[]) o;
+//            System.out.println("username = " + result[0]);
+//            System.out.println("age = " + result[1]);
+//            //2.Object[] type
+//            List<Object[]> resultList1 = em.createQuery("select distinct m.username, m.age from Member m")
+//                    .getResultList();
+//            Object[] result1 = resultList1.get(0);
+//            System.out.println("username = " + result1[0]);
+//            System.out.println("age = " + result1[1]);
+//            //3.*****new 명령어로 조회(제일 깔끔)*****
+//            List<MemberDTO> result2 = em.createQuery("select distinct new jpql.MemberDTO(m.username, m.age) from Member m", MemberDTO.class)
+//                    .getResultList();
+//            MemberDTO memberDTO = result2.get(0);
+//            System.out.println("username = " + memberDTO.getUsername());
+//            System.out.println("age = " + memberDTO.getAge());
 
 
             em.flush();
