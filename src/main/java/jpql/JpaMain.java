@@ -167,6 +167,43 @@ public class JpaMain {
 //                System.out.println("s = " + s);
 //            }
             
+            //JPQL 기본함수
+//            //concat : 문자열 합치기
+//            String query = "select concat('a','b') FROM Member m";
+//            List<String> result = em.createQuery(query,String.class).getResultList();
+//            for (String s: result) {
+//                System.out.println("s = " + s);
+//            }
+//            //substring : 문자열 잘라내기
+//            String query = "select substring(m.username,2,3) FROM Member m";
+//            List<String> result = em.createQuery(query,String.class).getResultList();
+//            for (String s: result) {
+//                System.out.println("s = " + s);
+//            }
+//            //TRIM : 공백 제거
+//            //LOWER, UPPER : 대소문자 변경
+//            //LENGTH : 문자열 길이
+//            //LOCATE : de의 위치 검색 -> s = 4
+//            String query = "select LOCATE('de', 'abcdef') FROM Member m";
+//            List<Integer> result = em.createQuery(query,Integer.class).getResultList();
+//            for (Integer s: result) {
+//                System.out.println("s = " + s);
+//            }
+//            // ABS, SQRT, MOD : 수학 함수
+//            //SIZE, INDEX
+//            String query = "select size(t.members) from Team t";
+//            List<Integer> result = em.createQuery(query, Integer.class)
+//                            .getResultList();
+
+            //사용자 정의 함수
+//            //1. MyH2Dialect 생성
+//            //2. xml에 MyH2Dialect 등록
+//            //3. 사용
+//            String query = "select function('group_concat' , m.username) from Member m";
+//            List<String> result = em.createQuery(query,String.class).getResultList();
+//            for (String s: result) {
+//                System.out.println("s = " + s);
+//            }
 
 
             em.flush();
