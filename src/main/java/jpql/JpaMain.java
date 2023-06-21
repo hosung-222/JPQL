@@ -25,9 +25,10 @@ public class JpaMain {
 //                em.persist(member);
 //            }
             Member member = new Member();
-            member.setUsername("teamA" );
+            member.setUsername("member1" );
             member.setAge(10);
             member.setTeam(team);
+            member.setType(MemberType.ADMIN);
 
             em.persist(member);
 
@@ -51,7 +52,7 @@ public class JpaMain {
 
 
             //파라미터 바인딩
-            //이름 기준
+//            //이름 기준
 //            Member result = em.createQuery("select m from Member m where m.username = :username", Member.class)
 //                    .setParameter("username", "member1")
 //                    .getSingleResult();
@@ -129,6 +130,7 @@ public class JpaMain {
 //                    .setFirstResult(1)
 //                    .setMaxResults(10)
 //                    .getResultList();
+
             //ON 절
 //            //1. 조인 대상 필터링
 //            String query = "select m from Member m left JOIN m.team t on t.name = 'teamA'";
@@ -139,6 +141,32 @@ public class JpaMain {
 //            List<Member> result = em.createQuery(query,Member.class).getResultList();
 //            System.out.println("result = " + result.size());
 
+
+            //조건식
+//            //기본 case 식
+//            String query = "select " +
+//                    "case when m.age <= 10 then '학생요금' " +
+//                    "when m.age >= 10 then '경로요금' " +
+//                    "else '일반요금' " +
+//                    "end " +
+//                    "FROM Member m " ;
+//            List<String> result = em.createQuery(query,String.class).getResultList();
+//            for (String s: result) {
+//                System.out.println("s = " + s);
+//            }
+//            //COALESCE : 하나씩 조회해서 null이 아니면 반환
+//            String query = "select coalesce(m.username,'이름없는회원') from Member m";
+//            List<String> result = em.createQuery(query,String.class).getResultList();
+//            for (String s: result) {
+//                System.out.println("s = " + s);
+//            }
+//            //NULLIF : 두 값이 같으면 null 반환, 다르면 첫번째 값 반환
+//            String query = "select nullif(m.username, 'member1') from Member m ";
+//            List<String> result = em.createQuery(query,String.class).getResultList();
+//            for (String s: result) {
+//                System.out.println("s = " + s);
+//            }
+            
 
 
             em.flush();
