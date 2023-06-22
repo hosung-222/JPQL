@@ -264,13 +264,23 @@ public class JpaMain {
 //                   .getResultList();
 
 
-            //NamedQuery
-            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
-                            .setParameter("username", "회원1")
-                                    .getResultList();
-            for (Member member1 : resultList ){
-                System.out.println("member= " + member1);
-            }
+//            //NamedQuery
+//            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+//                            .setParameter("username", "회원1")
+//                                    .getResultList();
+//            for (Member member1 : resultList ){
+//                System.out.println("member= " + member1);
+//            }
+
+
+
+            //벌크 연산 (FLUSH 자동호출 커밋, 쿼리시 -> DB 인서트 하지만 영속성 관리)
+            //.excuteUpdate는 영향받은 엔티티 수 반환
+            int resultCount = em.createQuery("update Member m set m.age=20")
+                            .executeUpdate();
+            System.out.println("resultCount = " + resultCount);;
+            //벌크 연산후 영속성 컨텍스트 내용은 변경 X -> 영속성 컨텍스트 초기화 필요
+            em.clear(); //후 다시 불러오기
 
 
 
