@@ -244,10 +244,28 @@ public class JpaMain {
             -> username = 회원1, member = Member@0x200 -> username = 회원2, member = Member@0x300 teamname = 팀A, team = Team@0x100
             -> username = 회원1, member = Member@0x200 -> username = 회원2, member = Member@0x300
             **/
-            // 일대다 조인으로 인한  중복 제거 -> DISTINCT
-            String jpql = "select distinct t  from Team t join fetch t.members";
-            List<Team> teams = em.createQuery(jpql, Team.class).getResultList();
-            System.out.println(teams.size());
+//            // 일대다 조인으로 인한  중복 제거 -> DISTINCT
+//            String jpql = "select distinct t  from Team t join fetch t.members";
+//            List<Team> teams = em.createQuery(jpql, Team.class).getResultList();
+//            System.out.println(teams.size());
+
+
+
+            //엔티티 직접 사용
+//            //엔티티를 파라미터로 전달 가능 ID로
+//            String query = "select  m from Member m where m = :member";
+//            List resultList = em.createQuery(query)
+//                            .setParameter("member", member)
+//                                    .getResultList();
+//            // 외래키 값 직접 사용
+//           String query = "select m from Member m where m.team = :team";
+//           List resultList = em.createQuery(query)
+//                   .setParameter("team", team)
+//                   .getResultList();
+
+
+
+
 
             em.flush();
             tx.commit();
