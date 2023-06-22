@@ -166,7 +166,9 @@ public class JpaMain {
 //            for (String s: result) {
 //                System.out.println("s = " + s);
 //            }
-            
+
+
+
             //JPQL 기본함수
 //            //concat : 문자열 합치기
 //            String query = "select concat('a','b') FROM Member m";
@@ -205,6 +207,47 @@ public class JpaMain {
 //                System.out.println("s = " + s);
 //            }
 
+
+
+            // 경로 표현식 특징
+//            //상태 필드 -> m.username 이 끝부분 더 이상 경로 탐색 불가능
+//            String query = "select m.username from Member m";
+//            List<String> result = em.createQuery(query, String.class).getResultList();
+//            //단일 값 연관 경로 -> m.team(묵시적 내부 조인 발생) 탐색 O (ex_m.team.name)
+//            String query = "select m.team.name from Member m";
+//            List<String> result = em.createQuery(query, String.class).getResultList();
+//            //컬렉션 값 연관 경로 -> 묵시적 내부 조인 발생, 탐색 X
+//            String query = "select t.members from Team t";
+//            List<String> result = em.createQuery(query, String.class).getResultList();
+
+
+
+//            //페치 조인
+//            String jpql = "select m  from Member m join fetch m.team";
+//            List<Member> members = em.createQuery(jpql, Member.class).getResultList();
+//            for (Member m: members) {
+//                //페치 조인으로 회원과 팀을 함께 조회해서 팀의 지연 로딩 x -> 즉시 영속성 관리
+//                System.out.println(" username, team = " + m.getUsername() + "," + m.getTeam().getName());
+//            }
+//            //컬렉션 패치 조인
+//            String jpql = "select t  from Team t join fetch t.members";
+//            List<Team> teams = em.createQuery(jpql, Team.class).getResultList();
+//            for (Team t: teams) {
+//                //페치 조인으로 회원과 팀을 함께 조회해서 팀의 지연 로딩 x -> 즉시 로딩 됨
+//                System.out.println("team = " + t.getName() + t);
+//                for (Member m : t.getMembers()){
+//                    System.out.println("m.getUsername() = " + m.getUsername() + member);
+//                }
+//            }
+            /**
+            teamname = 팀A, team = Team@0x100
+            -> username = 회원1, member = Member@0x200 -> username = 회원2, member = Member@0x300 teamname = 팀A, team = Team@0x100
+            -> username = 회원1, member = Member@0x200 -> username = 회원2, member = Member@0x300
+            **/
+            // 일대다 조인으로 인한  중복 제거 -> DISTINCT
+            String jpql = "select distinct t  from Team t join fetch t.members";
+            List<Team> teams = em.createQuery(jpql, Team.class).getResultList();
+            System.out.println(teams.size());
 
             em.flush();
             tx.commit();
