@@ -264,6 +264,13 @@ public class JpaMain {
 //                   .getResultList();
 
 
+            //NamedQuery
+            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+                            .setParameter("username", "회원1")
+                                    .getResultList();
+            for (Member member1 : resultList ){
+                System.out.println("member= " + member1);
+            }
 
 
 
